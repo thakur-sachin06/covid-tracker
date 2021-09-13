@@ -9,6 +9,8 @@ import CovidInfo from './container/content/covid-info/CovidInfo';
 import Table from './container/content/table/CovidTable';
 import { CovidContext } from './container/context/CovidContext';
 
+let debounceTimer;
+
 function App() {
   const {
     covidData,
@@ -41,6 +43,13 @@ function App() {
       }
     });
     setFiltered(filteredData);
+  }
+
+  function debounceSearch(text) {
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+    debounceTimer = setTimeout(searchData, 1000, text);
   }
 
   function sortData(data) {
@@ -102,7 +111,7 @@ function App() {
       <Header
         searchText={searchText}
         setSearchText={setSearchText}
-        searchData={searchData}
+        debounceSearch={debounceSearch}
       />
       {isLoading ? (
         <div class='loader'></div>

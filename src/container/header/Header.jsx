@@ -1,7 +1,11 @@
 import React from 'react';
 import './Header.css';
 
-function Header({ searchText, setSearchText, searchData }) {
+function Header({
+  searchText,
+  setSearchText,
+  debounceSearch,
+}) {
   return (
     <div className='header'>
       <h1 className='header-text'>Covid 19 Tracker</h1>
@@ -12,7 +16,7 @@ function Header({ searchText, setSearchText, searchData }) {
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value);
-          searchData(e.target.value.toLowerCase());
+          debounceSearch(e.target.value.toLowerCase());
         }}
       />
     </div>
