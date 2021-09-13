@@ -10,6 +10,7 @@
   width: 200px;
   padding: 14px;
   padding-right: 40px;
+  text-align: center;
 }
 
 .card:hover {
@@ -35,4 +36,15 @@
 
 .infoBox__cases--green {
   color: rgb(65, 206, 65);
+}
+
+@media only screen and (max-width: 800px) {
+  .covidInfo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
 }

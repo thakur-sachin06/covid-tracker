@@ -18,6 +18,7 @@ function App() {
   } = useContext(CovidContext);
 
   const [searchText, setSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   function searchData(text) {
     if (!text.length) {
@@ -28,13 +29,13 @@ function App() {
       if (
         elt &&
         elt.continent &&
-        elt.continent.toLowerCase() === text
+        elt.continent.toLowerCase().includes(text)
       ) {
         return elt;
       } else if (
         elt &&
         elt.country &&
-        elt.country.toLowerCase() === text
+        elt.country.toLowerCase().includes(text)
       ) {
         return elt;
       }
@@ -70,6 +71,7 @@ function App() {
   }
 
   async function fetchCovidData() {
+    setIsLoading(true);
     try {
       const data = await fetch(
         'https://covid-193.p.rapidapi.com/statistics',
@@ -82,6 +84,7 @@ function App() {
           },
         }
       );
+      setIsLoading(false);
       const covidData = await data.json();
       createCardData(covidData.response);
       sortData(covidData.response);
@@ -101,8 +104,14 @@ function App() {
         setSearchText={setSearchText}
         searchData={searchData}
       />
-      <CovidInfo />
-      <Table />
+      {isLoading ? (
+        <div class='loader'></div>
+      ) : (
+        <>
+          <CovidInfo />
+          <Table />
+        </>
+      )}
     </div>
   );
 }

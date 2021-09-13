@@ -21,20 +21,26 @@ function Table() {
             <button type='button'>Total Deaths</button>
           </th>
           <th>
-            <button type='button'>Recovered Cases</button>
+            <button type='button'>Recovered</button>
           </th>
         </tr>
       </thead>
       <tbody>
-        {filteredData.map((data, index) => (
-          <tr key={index}>
-            <td className='country-name'>{data.country}</td>
-            <td>{data.cases.total}</td>
-            <td>{data.cases.active}</td>
-            <td>{data.cases.recovered}</td>
-            <td>{data.deaths.total}</td>
-          </tr>
-        ))}
+        {filteredData && filteredData.length ? (
+          filteredData.map((data, index) => (
+            <tr key={index}>
+              <td className='country-name'>
+                {data.country}
+              </td>
+              <td>{data.cases.total}</td>
+              <td>{data.cases.active}</td>
+              <td>{data.cases.recovered}</td>
+              <td>{data.deaths.total}</td>
+            </tr>
+          ))
+        ) : (
+          <div className='no-data-text'>No data found </div>
+        )}
       </tbody>
     </table>
   );
