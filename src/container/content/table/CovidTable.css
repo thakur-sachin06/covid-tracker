@@ -6,8 +6,7 @@ table {
 
 thead th {
   text-align: left;
-  border-bottom: 2px solid black;
-  background: black;
+  background: rgba(0, 0, 0, 70%);
   position: sticky;
   color: white;
   top: 0;
@@ -41,7 +40,7 @@ tbody td {
   padding: 0.5em;
   border-bottom: 1px solid #ccc;
   color: rgba(0, 0, 0, 70%);
-  font-size: 18px;
+  font-size: 14px;
 }
 
 tbody tr:hover {

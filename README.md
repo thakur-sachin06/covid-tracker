@@ -1,6 +1,4 @@
-# Project Name
-
-Covid Tracker Web App
+# Covid Tracker Web App
 
 An responsive application to show Covid 19 data of all countries, built with React, Context Api, JavaScript, and CSS.
 
@@ -18,6 +16,12 @@ npm install
 
 ```
 npm test
+```
+
+## To Run Test Suite with Coverage:
+
+```
+npm test -- --coverage
 ```
 
 ## To start server:
