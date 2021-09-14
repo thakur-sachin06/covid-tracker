@@ -18,6 +18,7 @@ function Header({
           setSearchText(e.target.value);
           debounceSearch(e.target.value.toLowerCase());
         }}
+        data-testid='search-input'
       />
     </div>
   );
