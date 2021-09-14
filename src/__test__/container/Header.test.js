@@ -13,7 +13,7 @@ import {
 
 beforeEach(cleanup);
 
-const renderHomepage = () => {
+const renderHeader = () => {
   const setSearchText = jest.fn();
   const debounceSearch = jest.fn();
 
@@ -29,13 +29,13 @@ const renderHomepage = () => {
 
 describe('<Header />', () => {
   it('should renders header and search input', () => {
-    const { queryByTestId, getByText } = renderHomepage();
+    const { queryByTestId, getByText } = renderHeader();
     expect(getByText('Covid 19 Tracker')).toBeTruthy();
     expect(queryByTestId('search-input')).toBeTruthy();
   });
 
   it('should call the search', () => {
-    const { queryByTestId } = renderHomepage();
+    const { queryByTestId } = renderHeader();
     const searchInput = queryByTestId('search-input');
     fireEvent.change(searchInput, {
       target: {

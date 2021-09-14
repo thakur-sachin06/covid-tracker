@@ -9,48 +9,12 @@ import CovidInfo from './content/covid-info/CovidInfo';
 import Table from './content/table/CovidTable';
 import { CovidContext } from '../container/context/CovidContext';
 
-let debounceTimer;
-
 function Homepage() {
-  const {
-    covidData,
-    updateCovidData,
-    setFiltered,
-    setCardData,
-  } = useContext(CovidContext);
+  const { updateCovidData, setFiltered, setCardData } =
+    useContext(CovidContext);
 
   const [searchText, setSearchText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  function searchData(text) {
-    if (!text.length) {
-      setFiltered(covidData);
-      return;
-    }
-    const filteredData = covidData.filter((elt) => {
-      if (
-        elt &&
-        elt.continent &&
-        elt.continent.toLowerCase().includes(text)
-      ) {
-        return elt;
-      } else if (
-        elt &&
-        elt.country &&
-        elt.country.toLowerCase().includes(text)
-      ) {
-        return elt;
-      }
-    });
-    setFiltered(filteredData);
-  }
-
-  function debounceSearch(text) {
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
-    }
-    debounceTimer = setTimeout(searchData, 1000, text);
-  }
 
   function sortData(data) {
     const sortedData = data.sort((a, b) => {
@@ -89,6 +53,7 @@ function Homepage() {
 
   async function fetchCovidData() {
     setIsLoading(true);
+
     try {
       const data = await fetch(
         'https://covid-193.p.rapidapi.com/statistics',
@@ -103,11 +68,9 @@ function Homepage() {
       );
       setIsLoading(false);
       const covidData = await data.json();
-      createCardData(covidData.response);
       sortData(covidData.response);
-    } catch (err) {
-      console.log(err);
-    }
+      createCardData(covidData.response);
+    } catch (err) {}
   }
 
   useEffect(() => {
@@ -119,7 +82,7 @@ function Homepage() {
       <Header
         searchText={searchText}
         setSearchText={setSearchText}
-        debounceSearch={debounceSearch}
+        setFiltered={setFiltered}
       />
       {isLoading ? (
         <div class='loader'></div>
