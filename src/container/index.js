@@ -28,8 +28,8 @@ function Homepage() {
           : '0';
       return Number(elt1) < Number(elt2) ? 1 : -1;
     });
-    setFiltered(sortedData);
-    updateCovidData(sortedData);
+    setFiltered([...sortedData]);
+    updateCovidData([...sortedData]);
   }
 
   function createCardData(data) {
@@ -85,7 +85,7 @@ function Homepage() {
         setFiltered={setFiltered}
       />
       {isLoading ? (
-        <div class='loader'></div>
+        <div className='loader'></div>
       ) : (
         <>
           <CovidInfo />

@@ -40,7 +40,7 @@ tbody td {
   padding: 0.5em;
   border-bottom: 1px solid #ccc;
   color: rgba(0, 0, 0, 70%);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 tbody tr:hover {
@@ -59,6 +59,36 @@ tbody tr:hover {
   left: 140%;
   position: relative;
   margin-top: 140px;
+}
+
+.new-cases-text {
+  color: rgb(218, 69, 69);
+}
+
+.recovered-text {
+  color: rgb(11, 158, 11);
+}
+
+.sort-dropdown {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background: rgba(0, 0, 0, 50%);
+  color: white;
+  border-radius: 6px;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.sort-dropdown:focus-visible {
+  outline: none;
+}
+
+.sort-text {
+  margin-right: 20px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 60%);
+  font-size: 16px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -117,6 +147,12 @@ tbody tr:hover {
   }
   td:nth-of-type(5):before {
     content: 'Recovered';
+  }
+  td:nth-of-type(6):before {
+    content: 'Deaths 1MP';
+  }
+  td:nth-of-type(7):before {
+    content: 'Cases 1MP';
   }
 
   .no-data-text {
