@@ -10,11 +10,38 @@ import Table from './content/table/CovidTable';
 import { CovidContext } from '../container/context/CovidContext';
 
 function Homepage() {
-  const { updateCovidData, setFiltered, setCardData } =
-    useContext(CovidContext);
+  const {
+    updateCovidData,
+    setFiltered,
+    setCardData,
+    covidData,
+  } = useContext(CovidContext);
 
   const [searchText, setSearchText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  function searchData(text, data) {
+    if (!text.length) {
+      setFiltered(covidData);
+      return;
+    }
+    const filteredData = data.filter((elt) => {
+      if (
+        elt &&
+        elt.continent &&
+        elt.continent.toLowerCase().includes(text)
+      ) {
+        return elt;
+      } else if (
+        elt &&
+        elt.country &&
+        elt.country.toLowerCase().includes(text)
+      ) {
+        return elt;
+      }
+    });
+    setFiltered([...filteredData]);
+  }
 
   function sortData(data) {
     const sortedData = data.sort((a, b) => {
@@ -28,7 +55,14 @@ function Homepage() {
           : '0';
       return Number(elt1) < Number(elt2) ? 1 : -1;
     });
-    setFiltered([...sortedData]);
+    const searchValue =
+      window.localStorage.getItem('searchValue');
+    if (searchValue && searchValue.length) {
+      searchData(searchValue, sortedData);
+      setSearchText(searchValue);
+    } else {
+      setFiltered([...sortedData]);
+    }
     updateCovidData([...sortedData]);
   }
 

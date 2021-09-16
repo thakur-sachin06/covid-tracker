@@ -29,7 +29,9 @@ describe('<Header />', () => {
   it('should renders empty table', () => {
     const data = [];
     const { queryByTestId, getByText } = renderHeader(data);
-    expect(getByText('No data found')).toBeTruthy();
+    expect(
+      getByText('No data found for this search')
+    ).toBeTruthy();
     expect(queryByTestId('select')).toBeTruthy();
     // checking the columns name
     expect(getByText('Country')).toBeTruthy();
@@ -44,7 +46,9 @@ describe('<Header />', () => {
     const { queryByTestId, getByText } = renderHeader(
       covidData.response
     );
-    expect(() => getByText('No data found')).toThrowError();
+    expect(() =>
+      getByText('No data found for this search')
+    ).toThrowError();
 
     expect(getByText('India')).toBeTruthy();
     expect(queryByTestId('select')).toBeTruthy();
@@ -64,7 +68,9 @@ describe('<Header />', () => {
       getByTestId,
       getAllByTestId,
     } = renderHeader(covidData.response);
-    expect(() => getByText('No data found')).toThrowError();
+    expect(() =>
+      getByText('No data found for this search')
+    ).toThrowError();
     expect(queryByTestId('select')).toBeTruthy();
 
     fireEvent.change(getByTestId('select'), {
@@ -84,7 +90,9 @@ describe('<Header />', () => {
       getByTestId,
       getAllByTestId,
     } = renderHeader(covidData.response);
-    expect(() => getByText('No data found')).toThrowError();
+    expect(() =>
+      getByText('No data found for this search')
+    ).toThrowError();
     expect(queryByTestId('select')).toBeTruthy();
 
     fireEvent.change(getByTestId('select'), {

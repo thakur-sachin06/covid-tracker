@@ -56,9 +56,10 @@ tbody tr:hover {
   color: rgba(0, 0, 0, 60%);
   font-size: 24px;
   font-weight: 600;
-  left: 140%;
+  left: 100%;
   position: relative;
   margin-top: 140px;
+  width: max-content;
 }
 
 .new-cases-text {
@@ -157,10 +158,11 @@ tbody tr:hover {
 
   .no-data-text {
     color: rgba(0, 0, 0, 60%);
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
-    left: 30%;
+    left: 20%;
     position: relative;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 }

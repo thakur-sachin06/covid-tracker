@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Header.css';
 import { CovidContext } from '../context/CovidContext';
 
@@ -7,6 +7,14 @@ let debounceTimer;
 function Header({ searchText, setSearchText }) {
   const { covidData, setFiltered } =
     useContext(CovidContext);
+
+  useEffect(() => {
+    const searchValue =
+      window.localStorage.getItem('searchValue');
+    if (searchValue && searchValue.length) {
+      searchData(searchValue);
+    }
+  }, []);
 
   function searchData(text) {
     if (!text.length) {
@@ -28,7 +36,7 @@ function Header({ searchText, setSearchText }) {
         return elt;
       }
     });
-    setFiltered(filteredData);
+    setFiltered([...filteredData]);
   }
 
   function debounceSearch(text) {
@@ -36,6 +44,7 @@ function Header({ searchText, setSearchText }) {
       clearTimeout(debounceTimer);
     }
     debounceTimer = setTimeout(searchData, 1000, text);
+    window.localStorage.setItem('searchValue', text);
   }
 
   return (
