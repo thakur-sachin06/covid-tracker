@@ -1,83 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './CovidTable.css';
 import { CovidContext } from '../../context/CovidContext';
+import Dropdown from './Dropdown';
+import { TABLE_ROWS } from '../../../utils/constants';
 
 function Table() {
-  const { filteredData, setFiltered, covidData } =
-    useContext(CovidContext);
-
-  const sorting = (column) => {
-    const sortedData = filteredData.sort((a, b) => {
-      const elt1 =
-        a && a[column] && a[column]['1M_pop']
-          ? a[column]['1M_pop']
-          : '0';
-      const elt2 =
-        b && b[column] && b[column]['1M_pop']
-          ? b[column]['1M_pop']
-          : '0';
-      return Number(elt1) < Number(elt2) ? 1 : -1;
-    });
-    return sortedData;
-  };
-
-  const sortData = (selectedValue) => {
-    if (selectedValue === 'Deaths per 1MP') {
-      const sortedArr = sorting('deaths');
-      setFiltered([...sortedArr]);
-    } else if (selectedValue === 'Cases per 1MP') {
-      const sortedArr = sorting('cases');
-      setFiltered([...sortedArr]);
-    } else {
-      setFiltered([...covidData]);
-    }
-  };
+  const { filteredData } = useContext(CovidContext);
 
   return (
     <>
-      <span className='sort-text'>Sort Data</span>
-      <select
-        className='sort-dropdown'
-        onChange={(e) => sortData(e.target.value)}
-        data-testid='select'
-      >
-        <option defaultValue data-testid='select-option'>
-          Default...
-        </option>
-        <option data-testid='select-option'>
-          Deaths per 1MP
-        </option>
-        <option data-testid='select-option'>
-          Cases per 1MP
-        </option>
-      </select>
+      <Dropdown />
       <table className='table'>
         <thead>
           <tr>
-            <th>
-              <button type='button'>Country</button>
-            </th>
-            <th>
-              <button type='button'>New Cases</button>
-            </th>
-            <th>
-              <button type='button'>Total Cases</button>
-            </th>
-            <th>
-              <button type='button'>Active Cases</button>
-            </th>
-            <th>
-              <button type='button'>Recovered</button>
-            </th>
-            <th>
-              <button type='button'>Total Deaths</button>
-            </th>
-            <th>
-              <button type='button'>Deaths 1MP</button>
-            </th>
-            <th>
-              <button type='button'>Cases 1MP</button>
-            </th>
+            {TABLE_ROWS.map((row) => {
+              return (
+                <th>
+                  <button type='button'>{row}</button>
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
@@ -102,7 +44,7 @@ function Table() {
             ))
           ) : (
             <div className='no-data-text'>
-              No data found
+              No data found for this search
             </div>
           )}
         </tbody>
