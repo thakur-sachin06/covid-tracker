@@ -35,7 +35,6 @@ describe('<Header />', () => {
     expect(queryByTestId('select')).toBeTruthy();
     // checking the columns name
     expect(getByText('Country')).toBeTruthy();
-    expect(getByText('New Cases')).toBeTruthy();
     expect(getByText('Total Cases')).toBeTruthy();
     expect(getByText('Active Cases')).toBeTruthy();
     expect(getByText('Total Deaths')).toBeTruthy();
@@ -54,7 +53,6 @@ describe('<Header />', () => {
     expect(queryByTestId('select')).toBeTruthy();
     // checking the columns name
     expect(getByText('Country')).toBeTruthy();
-    expect(getByText('New Cases')).toBeTruthy();
     expect(getByText('Total Cases')).toBeTruthy();
     expect(getByText('Active Cases')).toBeTruthy();
     expect(getByText('Total Deaths')).toBeTruthy();

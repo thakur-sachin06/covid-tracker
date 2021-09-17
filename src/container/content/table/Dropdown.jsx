@@ -74,6 +74,7 @@ function Dropdown() {
               defaultValue={filter}
               data-testid='select-option'
               selected={elt === filter}
+              key={elt.toLowerCase()}
             >
               {elt}
             </option>

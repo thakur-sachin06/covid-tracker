@@ -15,7 +15,7 @@ function Table() {
           <tr>
             {TABLE_ROWS.map((row) => {
               return (
-                <th>
+                <th key={row.toLowerCase()}>
                   <button type='button'>{row}</button>
                 </th>
               );
